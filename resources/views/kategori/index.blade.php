@@ -37,6 +37,6 @@
         </tbody>
     </table>
 
-    {{ $kategori->links() }} <!-- Pagination -->
+    {{ $kategori->links() }}
 </div>
 @endsection

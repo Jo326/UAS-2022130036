@@ -7,14 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-     use HasFactory;
+    use HasFactory;
 
     protected $table = 'customer';
 
     protected $fillable = [
         'name',
-        'phone',
         'email',
         'address',
     ];
+
+    // Relasi dengan Penjualan
+    public function penjualan()
+    {
+        return $this->hasMany(Penjualan::class);
+    }
+
+    // Relasi dengan Service
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
 }

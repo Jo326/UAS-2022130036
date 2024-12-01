@@ -13,14 +13,28 @@ class Penjualan extends Model
 
     protected $fillable = [
         'customer_id',
+        'employee_id',
         'total_price',
         'transaction_date',
         'payment_method',
     ];
 
-    // Relasi dengan Customer
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class, 'employee_id');
     }
 }
+
+
+//     // Relasi dengan Produk
+//     public function produk()
+//     {
+//         return $this->belongsToMany(Produk::class, 'penjualan_produk')
+//                     ->withPivot('quantity', 'subtotal');
+//     }
+// }

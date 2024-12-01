@@ -12,7 +12,8 @@ class PenjualanController extends Controller
      */
     public function index()
     {
-        //
+        $penjualan = Penjualan::with(['customer', 'karyawan'])->paginate(10); // Relasi ke customer dan karyawan
+    return view('penjualan.index', compact('penjualan'));
     }
 
     /**

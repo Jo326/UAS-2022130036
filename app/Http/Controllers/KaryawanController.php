@@ -12,7 +12,8 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        //
+        $karyawan = Karyawan::paginate(10); // Mengambil data karyawan dengan pagination
+    return view('karyawan.index', compact('karyawan'));
     }
 
     /**

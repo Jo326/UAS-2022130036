@@ -15,4 +15,17 @@ class Kategori extends Model
         'name',
         'description',
     ];
+
+    public function produk()
+    {
+        return $this->hasMany(Produk::class, 'category_id');
+    }
 }
+
+
+//     // Relasi dengan Produk
+//     public function produk()
+//     {
+//         return $this->hasMany(Produk::class);
+//     }
+// }

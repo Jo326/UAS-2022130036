@@ -12,7 +12,10 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::with('customer')->paginate(10); // Menggunakan pagination jika data banyak
+
+        // Mengirim data ke view
+        return view('service.index', compact('services'));
     }
 
     /**

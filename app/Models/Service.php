@@ -22,6 +22,12 @@ class Service extends Model
     // Relasi dengan Customer
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    // Relasi dengan Karyawan
+    public function karyawan()
+    {
+        return $this->belongsToMany(Karyawan::class, 'karyawan_service');
     }
 }

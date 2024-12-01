@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-      Schema::create('produk', function (Blueprint $table) {
-        $table->id();
-        $table->string('name', 255);
-        $table->string('category', 100);
-        $table->decimal('price', 10, 2);
-        $table->integer('stock')->default(0);
-        $table->text('description')->nullable();
-        $table->string('photo')->nullable();
-        $table->timestamps();
-    });
+        Schema::create('produk', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 255);
+            $table->foreignId('category_id')->constrained('kategori')->onDelete('cascade'); // Relasi ke kategori
+            $table->decimal('price', 10, 2);
+            $table->integer('stock')->default(0);
+            $table->text('description')->nullable();
+            $table->string('photo')->nullable();
+            $table->timestamps();
+        });
+
     }
 
     /**

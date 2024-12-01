@@ -13,10 +13,25 @@ class Produk extends Model
 
     protected $fillable = [
         'name',
-        'category',
+        'category_id',
         'price',
         'stock',
         'description',
         'photo',
     ];
+
+    // Relasi ke kategori
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'category_id');
+    }
 }
+
+
+//     // Relasi dengan Penjualan
+//     public function penjualan()
+//     {
+//         return $this->belongsToMany(Penjualan::class, 'penjualan_produk')
+//                     ->withPivot('quantity', 'subtotal');
+//     }
+// }

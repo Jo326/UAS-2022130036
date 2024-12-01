@@ -10,9 +10,17 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function __construct()
+{
+    $this->middleware('auth');
+}
+
+
     public function index()
     {
-        //
+        $customers = Customer::all();  // Mengambil semua data customer
+        return view('customer.index', compact('customers'));  // Mengembalikan view dengan data
     }
 
     /**
@@ -20,7 +28,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.create');
     }
 
     /**
@@ -28,7 +36,16 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:customers,email',
+            'address' => 'required|string|max:255',
+        ]);
+
+        // Menyimpan customer baru ke database
+        Customer::create($request->all());
+
+        return redirect()->route('customer.index')->with('success', 'Customer created successfully.');
     }
 
     /**
@@ -36,7 +53,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('customer.show', compact('customer'));
     }
 
     /**
@@ -44,7 +61,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customer.edit', compact('customer'));
     }
 
     /**
@@ -52,7 +69,17 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        // Validasi data input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:customers,email,' . $customer->id,
+            'address' => 'required|string|max:255',
+        ]);
+
+        // Update data customer
+        $customer->update($request->all());
+
+        return redirect()->route('customer.index')->with('success', 'Customer updated successfully.');
     }
 
     /**
@@ -60,6 +87,9 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
-    }
+     // Hapus customer
+     $customer->delete();
+
+     return redirect()->route('customer.index')->with('success', 'Customer deleted successfully.');
+ }
 }

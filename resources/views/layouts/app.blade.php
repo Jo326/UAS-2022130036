@@ -30,7 +30,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -49,6 +48,25 @@
                                 </li>
                             @endif
                         @else
+                            <!-- Navbar links to resources -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('produk.index') }}">Produk</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('kategori.index') }}">Kategori</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('customer.index') }}">Customer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('penjualan.index') }}">Penjualan</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('service.index') }}">Service</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('karyawan.index') }}">Karyawan</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

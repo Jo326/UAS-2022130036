@@ -18,8 +18,8 @@ class ProdukController extends Controller
 
     public function index()
     {
-        // $produk = Produk::with('kategori')->paginate(20); // Menampilkan produk beserta kategori, 20 per halaman
-        return view('produk.index', compact('produk'));
+        $produk = Produk::with('kategori')->paginate(10); // Mengambil data produk beserta kategori
+    return view('produk.index', compact('produk'));
     }
 
     /**

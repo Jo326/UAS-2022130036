@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Karyawan extends Model
 {
-      use HasFactory;
+    use HasFactory;
 
     protected $table = 'karyawan';
 
@@ -17,4 +17,10 @@ class Karyawan extends Model
         'email',
         'phone',
     ];
+
+    // Relasi dengan Service
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'karyawan_service');
+    }
 }
