@@ -23,4 +23,14 @@ class Karyawan extends Model
     {
         return $this->belongsToMany(Service::class, 'karyawan_service');
     }
+
+    public function karyawan()
+{
+    return $this->belongsTo(Karyawan::class);
+}
+
+public function penjualans()
+{
+    return $this->hasMany(Penjualan::class);
+}
 }
