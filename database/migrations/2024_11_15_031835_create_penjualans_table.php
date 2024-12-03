@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('penjualan', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
-        $table->foreignId('employee_id')->constrained('karyawan')->onDelete('cascade');
-        $table->decimal('total_price', 10, 2);
-        $table->dateTime('transaction_date');
-        $table->string('payment_method', 50);
-        $table->timestamps();
-    });
+        Schema::create('penjualan', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
+            $table->foreignId('employee_id')->references('id')->on('karyawan')->onDelete('cascade');
+            $table->decimal('total_price', 10, 2);
+            $table->dateTime('transaction_date');
+            $table->string('payment_method', 50);
+            $table->timestamps();
+        });
     }
 
     /**

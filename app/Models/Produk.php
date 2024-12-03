@@ -25,13 +25,13 @@ class Produk extends Model
     {
         return $this->belongsTo(Kategori::class, 'category_id');
     }
+
+    // Relasi many-to-many dengan Penjualan melalui tabel pivot penjualan_produk
+public function penjualan()
+{
+    return $this->belongsToMany(Penjualan::class, 'penjualan_produk')
+                ->withPivot('quantity', 'subtotal');
 }
 
+}
 
-//     // Relasi dengan Penjualan
-//     public function penjualan()
-//     {
-//         return $this->belongsToMany(Penjualan::class, 'penjualan_produk')
-//                     ->withPivot('quantity', 'subtotal');
-//     }
-// }
