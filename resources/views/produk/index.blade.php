@@ -17,6 +17,7 @@
                 <th>Kategori</th>
                 <th>Harga</th>
                 <th>Stok</th>
+                <th>Deskripsi</th> <!-- Kolom baru untuk deskripsi -->
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -26,9 +27,12 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->kategori->name }}</td>
-                    <td>{{ $item->price }}</td>
+                    <td>Rp {{ number_format($item->price, 0, ',', '.') }}</td>
                     <td>{{ $item->stock }}</td>
+                    <td>{{ Str::limit($item->description, 50) }} <!-- Menampilkan deskripsi terbatas (50 karakter) -->
+                    </td>
                     <td>
+                        <a href="{{ route('produk.show', $item->id) }}" class="btn btn-info btn-sm">Lihat Detail</a> <!-- Tombol Lihat Detail -->
                         <a href="{{ route('produk.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('produk.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf

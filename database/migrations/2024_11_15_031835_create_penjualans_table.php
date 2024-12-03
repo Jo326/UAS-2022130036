@@ -13,7 +13,7 @@ return new class extends Migration
     {
        Schema::create('penjualan', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('customer_id')->constrained('customer')->onDelete('cascade');
+        $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
         $table->foreignId('employee_id')->constrained('karyawan')->onDelete('cascade');
         $table->decimal('total_price', 10, 2);
         $table->dateTime('transaction_date');

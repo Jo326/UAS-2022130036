@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use App\Models\Kategori;
+
 
 class ProdukController extends Controller
 {
@@ -27,7 +29,8 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        $kategori = Kategori::all(); // Mendapatkan semua kategori
+        return view('produk.create', compact('kategori'));
     }
 
     /**
@@ -35,7 +38,24 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:kategori,id',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'description' => 'nullable|string',
+            'photo' => 'nullable|image|max:2048',
+        ]);
+
+        // Upload foto jika ada
+        $data = $request->all();
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('produk_photos', 'public');
+        }
+
+        Produk::create($data);
+
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
     /**
@@ -43,7 +63,7 @@ class ProdukController extends Controller
      */
     public function show(Produk $produk)
     {
-        //
+        return view('produk.show', compact('produk'));
     }
 
     /**
@@ -51,7 +71,8 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        //
+        $kategori = Kategori::all();
+        return view('produk.edit', compact('produk', 'kategori'));
     }
 
     /**
@@ -59,7 +80,24 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:kategori,id',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'description' => 'nullable|string',
+            'photo' => 'nullable|image|max:2048',
+        ]);
+
+        // Upload foto jika ada
+        $data = $request->all();
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('produk_photos', 'public');
+        }
+
+        $produk->update($data);
+
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui.');
     }
 
     /**
@@ -67,6 +105,7 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //
+        $produk->delete();
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus.');
     }
 }

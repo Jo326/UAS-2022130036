@@ -25,12 +25,11 @@
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->address }}</td>
                     <td>
-                        <a href="{{ route('customer.show', $customer->id) }}" class="btn btn-info">Lihat</a>
                         <a href="{{ route('customer.edit', $customer->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('customer.destroy', $customer->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus customer ini?')">Hapus</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus customer ini?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
